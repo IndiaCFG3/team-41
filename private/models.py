@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 
-class membership_status(AbstractUser):
+class membership_status(AbstractBaseUser):
     Name = models.TextField(max_length = 100)
     Receipt_Number = models.AutoField(primary_key=True)
     Date = models.DateField(auto_now_add=True)
@@ -20,7 +20,7 @@ class membership_status(AbstractUser):
     Monthly_income = models.IntegerField()
     Volunteer_id = models.IntegerField(null=True)
 
-class ngo_staff(AbstractUser):
+class ngo_staff(AbstractBaseUser):
     Name = models.TextField(max_length = 100)
     Enrollment_ID = models.AutoField(primary_key=True)
     DateOfEnrollment = models.DateField(auto_now_add=True)

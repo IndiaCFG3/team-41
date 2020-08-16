@@ -16,7 +16,8 @@ create table users (
   monthly int ,
   volunteer_id varchar ,
   docs int ,
-  membership int
+  membership int,
+  password varchar(100)
 );
 
 create table volunteers(

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Membership
+from private.models import membership_status,ngo_staff
 # Register your models here.
-
-admin.site.register(Membership)
+admin.site.register(membership_status)
+admin.site.register(ngo_staff)

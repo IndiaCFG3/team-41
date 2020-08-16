@@ -17,6 +17,7 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
 
+
 # bot = ChatBot("Candice")
 # bot.set_trainer(ListTrainer)
 # bot.train(['What is your name?', 'My name is Candice'])
@@ -220,6 +221,29 @@ def user_form_vol():
             return render_template('user_form.html',flag = 0)
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","volunteer_id", "documents","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,vol_id, documents,monthly,occupation])
         db.commit()
+        gmail_user = ''
+        gmail_password = ''
+
+        sent_from = gmail_user
+        to = [to]
+        subject = 'Panah Foundation'
+        body = 'Successfull submission'
+
+        email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
+        """ % (sent_from, ", ".join(to), subject, body)
+
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            server.login(gmail_user, gmail_password)
+            server.sendmail(sent_from, to, email_text)
+            server.close()
+
+            print ('Email sent!')
+            return 'Email sent!'
+        except:
+            print ('Something went wrong...')
+            return 'Email not sent!'
         return "success"
     return render_template('user_form_volunteer.html')
 

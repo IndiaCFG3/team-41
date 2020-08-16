@@ -100,6 +100,13 @@ def dashboard():
     else :
         return redirect(url_for('login'))
 
+@app.route('/dash')
+def dash():
+    return render_template('dashboard.html')
+
+@app.route('/createScheme')
+def createSchema():
+    return render_template('createScheme.html')
 @app.route('/mailsent')
 def mailsent():
     user=get_current_user()
@@ -184,6 +191,9 @@ def user_form_self():
         return redirect(url_for('home'))
     return render_template('user_form.html')
 
+@app.route("/temp")
+def temp():
+    return render_template("DashboardVolunteer.html")
 @app.route('/user_form_volunteer', methods = ['GET','POST'])
 def user_form_vol():
     if request.method == 'POST':

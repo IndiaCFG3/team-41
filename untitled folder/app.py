@@ -12,12 +12,30 @@ import hashlib
 import requests
 import os
 from random import randint
+from flask import Flask, render_template, request
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ListTrainer
+
+# bot = ChatBot("Candice")
+# bot.set_trainer(ListTrainer)
+# bot.train(['What is your name?', 'My name is Candice'])
+# bot.train(['Who are you?', 'I am a bot' ])
+# bot.train(['Who created you?', 'Tony Stark', 'Sahil Rajput', 'You?'])
+# bot.set_trainer(ChatterBotCorpusTrainer)
+# bot.train("chatterbot.corpus.english")
 
 
 app = Flask(__name__)
 
 app.config['DEBUG']=True
 app.config['SECRET_KEY']= os.urandom(24)
+
+
+@app.route("/get")
+def get_bot_response():
+    userText = request.args.get('msg')
+    return str(bot.get_response(userText))
 
 
 @app.teardown_appcontext

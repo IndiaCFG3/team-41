@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
-import misaka
+
 
 
 class User(models.Model):

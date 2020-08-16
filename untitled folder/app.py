@@ -131,6 +131,29 @@ def logout():
 
 @app.route('/user_form')
 def user_form_self():
+    if request.method == 'POST':
+        name = request.form['name']
+        mobile = request.form['phone']
+        email = request.form['email']
+        dob = request.form['dob']
+        gender = request.form['gender']
+        education = request.form['education']
+        father = request.form['father']
+        mother = request.form['mother']
+        locality = request.form['locality']
+        state = request.form['state']
+        zip = request.form['zip']
+        membersNum = request.form['membersNum']
+        locality = request.form['locality']
+        db = get_db()
+        cur = db.execute('select * from users where "phone" = ?;',[phone])
+        result=cur.fetchone()
+        if result:
+            return render_template('user_form_self',flag = 0)
+        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum])
+        db.commit()
+        authenticator(username,token.hexdigest())
+        return "success"
     return render_template('user_form.html')
 
 @app.route('/user_form_volunteer')

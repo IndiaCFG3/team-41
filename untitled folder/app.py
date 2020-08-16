@@ -142,6 +142,9 @@ def volunteer_form():
         return redirect(url_for('login'))
     return render_template('signup.html', flag = 1)
 
+@app.route('/volunteer')
+def volunteer():
+    return render_template('volunteerTable.html')
 @app.route('/logout')
 def logout():
     user = get_current_user()

@@ -223,13 +223,11 @@ def user_form_vol():
         return "success"
     return render_template('user_form_volunteer.html')
 
-@app.route('/volunteer_form')
+@app.route('/volunteer_form', methods = ['GET','POST'])
 def volunteer_form_reg():
     if request.method == 'POST':
         name = request.form['name']
         password = request.form['password']
-        password = hashlib.md5(password.encode())
-        password = password.hexdigest()
         mobile = request.form['phone']
         email = request.form['email']
         dob = request.form['dob']
@@ -246,7 +244,7 @@ def volunteer_form_reg():
         result=cur.fetchone()
         if result:
             return render_template('user_form.html',flag = 0)
-        db.execute('insert into volunteers ("name","phone","father","mother","dob","gender","email","education","address","password") values (?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,password])
+        db.execute('insert into volunteers ("name","phone","father","mother","dob","gender","email","education","address") values (?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality])
         db.commit()
         return "success"
     return render_template('volunteer_form.html')

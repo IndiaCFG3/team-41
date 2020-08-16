@@ -21,7 +21,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-      Dashboard
+    Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -46,8 +46,8 @@
         </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="#">
+          <li class="nav-item ">
+            <a class="nav-link" href="dashboard.html">
               <i class="material-icons">dashboard</i>
               <p>Schemas</p>
             </a>
@@ -64,7 +64,7 @@
               <p>Delete Scheme</p>
             </a>
           </li> -->
-          <li class="nav-item ">
+          <li class="nav-item active  ">
             <a class="nav-link" href="#">
               <i class="material-icons">library_books</i>
               <p>Volunteer Application</p>
@@ -151,44 +151,62 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xl-4 col-lg-12">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Lifes impacted over the week..</h4>
-                  <p class="card-category">
-                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-12">
-              <div class="card card-chart">
-                <div class="card-header card-header-warning">
-                  <div class="ct-chart" id="websiteViewsChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Memberships</h4>
-                  <p class="card-category">Last Campaign Performance</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                  </div>
-                </div>
-              </div>
-            </div> 
+            <body>
+                    <h1><strong>Volunteer Dashboard</strong></h1>
+                      <div class="limiter">
+                          <div class="container-table100">
+                              <div class="wrap-table100">
+                                  <div class="table100">
+                                      <table>
+                                          <thead>
+                                                 <th>NAME</th>
+                                                   <th>DATE</th>
+                                                   <th>Father's Name</th>
+                                                   <th>Mother's Name</th>
+                                                   <th>DOB</th>
+                                                   <th>AGE</th>
+                                                   <th>EDUCATION</th>
+                                                   <th>ADDRESS</th>
+                                                   <th>PHONE</th>
+                                                   <th>EMAIL</th><hr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  {%for val in volunteers %}
+                                                  <td>{{val.name}}</td>
+                                                  <td>{{val.date}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td>{{val.}}</td>
+                                                  <td><button type='button'>Approve</button></td>
+                                 {% endfor %}
+                                </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  
+                  
+                  
+                  
+                  <!--===============================================================================================-->
+                      <!-- <script src="Table_Responsive_v1/Table_Responsive_v1/vendor/jquery/jquery-3.2.1.min.js"></script> -->
+                  <!--===============================================================================================-->
+                      <!-- <script src="Table_Responsive_v1/Table_Responsive_v1/vendor/bootstrap/js/popper.js"></script>
+                      <script src="Table_Responsive_v1/Table_Responsive_v1/vendor/bootstrap/js/bootstrap.min.js"></script> -->
+                  <!--===============================================================================================-->
+                      <!-- <script src="Table_Responsive_v1/Table_Responsive_v1/vendor/select2/select2.min.js"></script> -->
+                  <!--===============================================================================================-->
+                      <!-- <script src="Table_Responsive_v1/Table_Responsive_v1/js/main.js"></script> -->
+                  
           </div>
-        </div>
-      </div>
       <!-- <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -248,6 +266,22 @@
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script>
+    function createScheme(){
+        var data = new FormData()
+        data.append('scheme_name',document.querySelector("#name").value)
+        data.append("desc", document.querySelector("#desc").value)
+        data.append("income_upper", document.querySelector("#income_upper").value)
+        data.append("income_lower", document.querySelector("#income_lower").value)
+        gender = document.querySelector("#male").checked
+        if(gender == true)  gender="male"
+        else    gender="female"
+        data.append("gender", gender)
+        fetch('/insertScheme',{
+                method:"POST",
+                body: data,
+            })
+    }
+
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');

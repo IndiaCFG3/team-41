@@ -165,7 +165,7 @@
                           <div class="col-md-12">
                             <div class="form-group">
                               <label class="bmd-label-floating">Scheme Name</label>
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="name" id="name">
                             </div>
                           </div>
                         </div>
@@ -175,7 +175,7 @@
                               <label>Description</label>
                               <div class="form-group">
                                 <label class="bmd-label-floating"> Add Description of scheme</label>
-                                <textarea class="form-control" rows="5"></textarea>
+                                <textarea class="form-control" rows="5" name="desc" id="desc"></textarea>
                               </div>
                             </div>
                           </div>
@@ -184,37 +184,29 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label class="bmd-label-floating">Lower Bound of Income</label>
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="income_lower" id="income_lower">
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group">
                               <label class="bmd-label-floating">Uppper Bound Of Inomce</label>
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="income_upper" id="income_upper">
                             </div>
                           </div>
                         </div>
-                        <label>Gender: </label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" checked name="gender" id="male" value="male" >
-                                        <label class="form-check-label" for="male">Male</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" >
-                                        <label class="form-check-label" for="female">Female</label>
-                                    </div>
+                        
                       <div class="row">
-                            <div class="form-group">
-                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
-                                <label class="custom-control-label" for="defaultChecked1">AdharCard Requirement</label>
-                            </div>
-                      </div>
-                      <div class="row">
-                        <div class="custom-control custom-checkbox">
-                          <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
-                          <label class="custom-control-label" for="defaultChecked2">pancard Requirement</label>
-                        </div>
-    
+                                    <div class="col-md-12">
+                                            <label>Gender: </label><br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="" type="radio" checked name="gender" id="male" value="male" >
+                                                <label class="form-check-label" for="male">Male</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="" type="radio" name="gender" id="female" value="female" >
+                                                <label class="form-check-label" for="female">Female</label>
+                                            </div>
+                                    </div>
                       </div>
     
                         <button type="submit" class="btn btn-primary pull-right">Add scheme</button>
@@ -303,6 +295,22 @@
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
   <script>
+    function createScheme(){
+        var data = new FormData()
+        data.append('scheme_name',document.querySelector("#name").value)
+        data.append("desc", document.querySelector("#desc").value)
+        data.append("income_upper", document.querySelector("#income_upper").value)
+        data.append("income_lower", document.querySelector("#income_lower").value)
+        gender = document.querySelector("#male").checked
+        if(gender == true)  gender="male"
+        else    gender="female"
+        data.append("gender", gender)
+        fetch('/insertScheme',{
+                method:"POST",
+                body: data,
+            })
+    }
+
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');

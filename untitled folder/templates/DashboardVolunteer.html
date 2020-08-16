@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>Table V01</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="Table_Responsive_v1/Table_Responsive_v1/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/css/util.css">
+	<link rel="stylesheet" type="text/css" href="Table_Responsive_v1/Table_Responsive_v1/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+  <h1><strong>Volunteer Dashboard</strong></h1>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table>
+						<thead>
+							   <th>NAME</th>
+								 <th>DATE</th>
+								 <th>Father's Name</th>
+								 <th>Mother's Name</th>
+								 <th>DOB</th>
+								 <th>AGE</th>
+								 <th>EDUCATION</th>
+								 <th>ADDRESS</th>
+								 <th>PHONE</th>
+								 <th>EMAIL</th><hr>
+						</thead>
+						<tbody>
+							<tr>
+								{%for val in volunteers %}
+								<td>{{val.name}}</td>
+								<td>{{val.date}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td>{{val.}}</td>
+								<td><button type='button'>Approve</button></td>
+               {% endfor %}
+              </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!--===============================================================================================-->
+	<script src="Table_Responsive_v1/Table_Responsive_v1/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="Table_Responsive_v1/Table_Responsive_v1/vendor/bootstrap/js/popper.js"></script>
+	<script src="Table_Responsive_v1/Table_Responsive_v1/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="Table_Responsive_v1/Table_Responsive_v1/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="Table_Responsive_v1/Table_Responsive_v1/js/main.js"></script>
+
+</body>
+</html>

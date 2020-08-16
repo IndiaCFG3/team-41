@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'public_',
     'private',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

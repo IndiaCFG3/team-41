@@ -12,6 +12,22 @@ import hashlib
 import requests
 import os
 from random import randint
+<<<<<<< HEAD
+from flask import Flask, render_template, request
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ListTrainer
+
+
+# bot = ChatBot("Candice")
+# bot.set_trainer(ListTrainer)
+# bot.train(['What is your name?', 'My name is Candice'])
+# bot.train(['Who are you?', 'I am a bot' ])
+# bot.train(['Who created you?', 'Tony Stark', 'Sahil Rajput', 'You?'])
+# bot.set_trainer(ChatterBotCorpusTrainer)
+# bot.train("chatterbot.corpus.english")
+=======
+>>>>>>> 06087c3f95f535e3ebd34abe3554b9857691fc97
 
 
 app = Flask(__name__)
@@ -231,7 +247,34 @@ def user_form_vol():
             return render_template('user_form.html',flag = 0)
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","volunteer_id", "documents","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,vol_id, documents,monthly,occupation])
         db.commit()
+<<<<<<< HEAD
+        gmail_user = ''
+        gmail_password = ''
+
+        sent_from = gmail_user
+        to = [to]
+        subject = 'Panah Foundation'
+        body = 'Successfull submission'
+
+        email_text = """From: %s\nTo: %s\nSubject: %s\n\n%s
+        """ % (sent_from, ", ".join(to), subject, body)
+
+        try:
+            server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+            server.ehlo()
+            server.login(gmail_user, gmail_password)
+            server.sendmail(sent_from, to, email_text)
+            server.close()
+
+            print ('Email sent!')
+            return 'Email sent!'
+        except:
+            print ('Something went wrong...')
+            return 'Email not sent!'
+        return "success"
+=======
         return redirect(url_for('home'))
+>>>>>>> 06087c3f95f535e3ebd34abe3554b9857691fc97
     return render_template('user_form_volunteer.html')
 
 @app.route('/volunteer_form', methods = ['GET','POST'])

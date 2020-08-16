@@ -87,13 +87,13 @@ def login():
         return redirect(url_for('dashboard'))
     if request.method == 'POST':
         username = request.form['login-username']
-        password = hashlib.md5(request.form['login-password'].encode())
+        password = request.form['login-password']
         db = get_db()
-        cur = db.execute('select * from users where "phone" = ?;',[username])
+        cur = db.execute('select * from login_users where "login_ID" = ?;',[username])
         result=cur.fetchone()
         if result:
-            if result['password']==password.hexdigest() :
-                session['enrollment_ID'] = username
+            if result['password']==password :
+                session['login_ID'] = username
                 return  redirect(url_for('dashboard'))
             else :
                 return render_template('login.html',flag=0)
@@ -117,6 +117,7 @@ def volunteer_form():
         db.execute('insert into users ("name","username","email","password","token") values (?,?,?,?,?)',[name,username,email,password.hexdigest(),token.hexdigest()])
         db.commit()
         authenticator(username,token.hexdigest())
+
         return redirect(url_for('login'))
     return render_template('signup.html', flag = 1)
 
@@ -153,11 +154,10 @@ def user_form_self():
         db = get_db()
         cur = db.execute('select * from users where "phone" = ?;',[mobile])
         result=cur.fetchone()
-        if result:
-            return render_template('user_form.html',flag = 0)
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,monthly,occupation])
+        db.execute('insert into login_users ("login_ID","password") values (?,?)',[mobile,password])
         db.commit()
-        return "success"
+        return redirect(url_for('login'))
     return render_template('user_form.html')
 
 @app.route('/user_form_volunteer', methods = ['GET','POST'])

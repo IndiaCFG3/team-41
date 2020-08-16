@@ -30,7 +30,7 @@ def get_current_user():
     if 'enrollment_ID' in session:
         enrollment_ID = session['enrollment_ID']
         db = get_db()
-        cur = db.execute('select * from users where "enrollment_ID" = ?;',[enrollment_ID])
+        cur = db.execute('select * from login_users where "login_ID" = ?;',[enrollment_ID])
         user_result = cur.fetchone()
     return user_result
 
@@ -42,6 +42,20 @@ def home():
 @app.route('/about')
 def first():
     return  render_template('about-us.html')
+
+@app.route('/schemes_available')
+def schemes_available():
+    user = get_current_user()
+    if user:
+        schemes = []
+        db = get_db()
+        cur = db.execute('select "monthly","gender" from schemes where "phone" = ?;',[user['login_ID']])
+        result=cur.fetchone()
+        cur = db.execute('select "id" from schemes where ? between "lowerbound" and "upperbound"',[result['monthly']])
+        results = cur.fetchall()
+        return render_template('schemes_available.html',schemes = results)
+    else :
+        return redirect(url_for('login'))
 
 
 
@@ -125,7 +139,7 @@ def volunteer_form():
 def logout():
     user = get_current_user()
     if user:
-        session.pop('enrollment_ID', None)
+        session.pop('login_ID', None)
         return redirect(url_for('login'))
     else:
         return redirect(url_for('login'))
@@ -135,8 +149,6 @@ def user_form_self():
     if request.method == 'POST':
         name = request.form['name']
         password = request.form['password']
-        password = hashlib.md5(password.encode())
-        password = password.hexdigest()
         mobile = request.form['phone']
         email = request.form['email']
         dob = request.form['dob']
@@ -154,7 +166,7 @@ def user_form_self():
         db = get_db()
         cur = db.execute('select * from users where "phone" = ?;',[mobile])
         result=cur.fetchone()
-        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,monthly,occupation])
+        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password])
         db.execute('insert into login_users ("login_ID","password") values (?,?)',[mobile,password])
         db.commit()
         return redirect(url_for('login'))

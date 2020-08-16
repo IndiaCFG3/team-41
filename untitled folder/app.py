@@ -12,30 +12,12 @@ import hashlib
 import requests
 import os
 from random import randint
-from flask import Flask, render_template, request
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-from chatterbot.trainers import ListTrainer
-
-# bot = ChatBot("Candice")
-# bot.set_trainer(ListTrainer)
-# bot.train(['What is your name?', 'My name is Candice'])
-# bot.train(['Who are you?', 'I am a bot' ])
-# bot.train(['Who created you?', 'Tony Stark', 'Sahil Rajput', 'You?'])
-# bot.set_trainer(ChatterBotCorpusTrainer)
-# bot.train("chatterbot.corpus.english")
 
 
 app = Flask(__name__)
 
 app.config['DEBUG']=True
 app.config['SECRET_KEY']= os.urandom(24)
-
-
-@app.route("/get")
-def get_bot_response():
-    userText = request.args.get('msg')
-    return str(bot.get_response(userText))
 
 
 @app.teardown_appcontext
@@ -106,6 +88,13 @@ def dashboard():
     else :
         return redirect(url_for('login'))
 
+@app.route('/dash')
+def dash():
+    return render_template('dashboard.html')
+
+@app.route('/createScheme')
+def createSchema():
+    return render_template('createScheme.html')
 @app.route('/mailsent')
 def mailsent():
     user=get_current_user()
@@ -190,6 +179,9 @@ def user_form_self():
         return redirect(url_for('login'))
     return render_template('user_form.html')
 
+@app.route("/temp")
+def temp():
+    return render_template("DashboardVolunteer.html")
 @app.route('/user_form_volunteer', methods = ['GET','POST'])
 def user_form_vol():
     if request.method == 'POST':

@@ -94,10 +94,13 @@ def login():
         if result:
             if result['password']==password :
                 session['login_ID'] = username
+                return "yes"
                 return  redirect(url_for('dashboard'))
             else :
+                return "1"
                 return render_template('login.html',flag=0)
         else:
+            return "2"
             return render_template('login.html',flag=0)
     return render_template('login.html',flag = 1)
 

@@ -2,11 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-class Scheme(model.Model):
+class Scheme(models.Model):
     Name = models.TextField(max_length = 100)
-    Description =  models.TextField(max_lenth = 1000)
+    Description =  models.TextField(max_length = 1000)
     Income_lowerbound = models.IntegerField()
     Income_upperbound = models.IntegerField()
     Gender = models.TextField(max_length = 10)
-    Adhar = models.BooleanField(initial=True)
-    PanCard = models.BooleanField(initial=True)
+    Adhar = models.BooleanField(default=True)
+    PanCard = models.BooleanField(default=True)

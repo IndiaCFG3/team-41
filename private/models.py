@@ -17,7 +17,7 @@ class membership_status(AbstractUser):
     State = models.TextField(max_length = 100)
     Family_members_count = models.IntegerField()
     Occupation = models.TextField(max_length=100)
-    Montly = models.IntegerField()
+    Monthly_income = models.IntegerField()
     Volunteer_id = models.IntegerField(null=True)
 
 class ngo_staff(AbstractUser):
@@ -32,7 +32,5 @@ class ngo_staff(AbstractUser):
     Address = models.TextField(max_length = 100)
     City = models.TextField(max_length = 100)
     State = models.TextField(max_length = 100)
-    Family_members_count = models.IntegerField()
-    Occupation = models.TextField(max_length=100)
-    Montly = models.IntegerField()
-    Volunteer_id = models.IntegerField(null=True)
+    Login_password = models.TextField(max_length=100)
+    User_role = models.IntegerField()

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Us</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        body {
+            background-image: url('https://www.xmple.com/wallpaper/grey-black-gradient-linear-1920x1080-c2-808080-000000-a-300-f-14.svg');
+          }
+          .sm{
+    margin-top: 15%;
+    margin-left: 35%;
+  }
+  .sm a{
+    display: inline-flex;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    transition: 0.4s;
+    border-radius: 50%;
+    text-decoration: none;
+  }
+  .sm a:hover{
+    background: white;
+    color: #2c3e50;
+    text-decoration: none;
+  }
+        </style>
+    </head>
+    <body>
+        <span id=con>Contact Us<span>
+                 <div class="sm">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-youtube"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+    </body>
+</html>
+
+{% endblock content %}

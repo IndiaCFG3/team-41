@@ -19,7 +19,8 @@ create table users (
   volunteer_id varchar ,
   docs int ,
   membership int,
-  password varchar(100)
+  password varchar(100),
+  documents varchar(200)
 );
 
 create table volunteers(

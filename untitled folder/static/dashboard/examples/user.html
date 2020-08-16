@@ -21,7 +21,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Dashboard Dark Edition by Creative Tim
+    Panah Foundation
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -55,7 +55,7 @@
           <li class="nav-item active ">
             <a class="nav-link" href="./user.html">
               <i class="material-icons">person</i>
-              <p>User Profile</p>
+              <p>Add scheme</p>
             </a>
           </li>
           <li class="nav-item ">
@@ -102,7 +102,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">User Profile</a>
+            <a class="navbar-brand" href="javascript:void(0)">Add Scheme</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
@@ -164,41 +164,15 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Edit Profile</h4>
-                  <p class="card-category">Complete your profile</p>
+                  <h4 class="card-title">Add Scheme</h4>
+                  <p class="card-category">Add the information about scheme</p>
                 </div>
                 <div class="card-body">
                   <form>
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Company (disabled)</label>
-                          <input type="text" class="form-control" disabled>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Fist Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Last Name</label>
+                          <label class="bmd-label-floating">Scheme Name</label>
                           <input type="text" class="form-control">
                         </div>
                       </div>
@@ -206,43 +180,43 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Adress</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">City</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Country</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>About Me</label>
+                          <label>Description</label>
                           <div class="form-group">
-                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                            <label class="bmd-label-floating"> Add Description of scheme</label>
                             <textarea class="form-control" rows="5"></textarea>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Lower Bound of Income</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Uppper Bound Of Inomce</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  <div class="row">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" checked>
+                            <label class="custom-control-label" for="defaultChecked1">AdharCard Requirement</label>
+                        </div>
+                  </div>
+                  <div class="row">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked>
+                      <label class="custom-control-label" for="defaultChecked2">pancard Requirement</label>
+                    </div>
+
+                  </div>
+
+                    <button type="submit" class="btn btn-primary pull-right">Add scheme</button>
                     <div class="clearfix"></div>
                   </form>
                 </div>
@@ -256,10 +230,11 @@
                   </a>
                 </div>
                 <div class="card-body">
-                  <h6 class="card-category">CEO / Co-Founder</h6>
-                  <h4 class="card-title">Alec Thompson</h4>
+                  <h6 class="card-category">Panah Foundation</h6>
+                  <h4 class="card-title">Dignifying Labour</h4>
                   <p class="card-description">
-                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                    Panah Foundation works in the space of creating dignity and awareness for the
+                    lowest strata of the society - the informal labour sector.
                   </p>
                   <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
                 </div>

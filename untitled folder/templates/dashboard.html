@@ -151,7 +151,7 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
-        <div class="container-fluid">
+        <!-- <div class="container-fluid">
           <div class="row">
 
             <div class="col-xl-4 col-lg-12">
@@ -188,7 +188,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12">
+           <div class="col-md-12">
             <div class="card card-plain">
               <div class="card-header card-header-primary">
                 <h4 class="card-title mt-0"> Table on Plain Background</h4>
@@ -322,8 +322,34 @@
                 </div>
               </div>
             </div>
+          </div> 
+        </div> -->
+        <div class="row">
+            {% for ob in schemes %}
+            <div class="col-md-6 col-lg-4">
+              <div class="rotating-card-container manual-flip" style="margin-bottom: 30px;">
+                <div class="card card-rotate">
+                  <div class="front" style="width: 349.984px;">
+                    <div class="card-body">
+                      
+                      <h4 class="card-title">
+                        <a href="#pablo">"{{ob['name']}}"</a>
+                      </h4>
+                      <p class="card-description">
+                          {{ob['desc']}}
+                      </p>
+                      <p>Eligibilty:
+                        Income: {{ob['lower']}}-{{ob['upper']}}<br>
+                        Gender: {{ob['gender']}}=
+                      </p>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
           </div>
-        </div>
       </div>
       <!-- <footer class="footer">
         <div class="container-fluid">

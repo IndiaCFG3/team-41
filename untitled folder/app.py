@@ -104,6 +104,10 @@ def dashboard():
 def dash():
     return render_template('dashboard.html')
 
+@app.route('/schemes')
+def schemes():
+    return render_template('schemes.html')
+
 @app.route('/createScheme')
 def createSchema():
     return render_template('createScheme.html')
@@ -142,7 +146,7 @@ def volunteer_form():
         email = request.form['signup-email']
         password = hashlib.md5(request.form['signup-password'].encode())
         token = hashlib.md5(str(randint(1,1000000)).encode())
-        db = get_db()
+        db = get_db() 
         cur = db.execute('select "id","name","username","email","password" from users where "username" = ?;',[username])
         result=cur.fetchone()
         if result:

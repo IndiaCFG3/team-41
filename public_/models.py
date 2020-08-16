@@ -38,6 +38,9 @@ class User(models.Model):
     def __str__(self):
         return self.user_id
 
+    def get_absolute_url(self):
+        return reverse('#')
+
 class Volunteer(models.Model):
     Gender_Choice = (
         ('male', 'male'),
@@ -66,6 +69,9 @@ class Volunteer(models.Model):
     email=models.EmailField()
     approved=models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.user_id
+
 
 
 
@@ -80,3 +86,6 @@ class Scheme(models.Model):
     Gender = models.TextField(max_length = 10)
     Adhar = models.BooleanField(default=True)
     PanCard = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.Name

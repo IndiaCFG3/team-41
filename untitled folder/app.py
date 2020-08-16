@@ -30,7 +30,7 @@ def get_current_user():
     if 'enrollment_ID' in session:
         enrollment_ID = session['enrollment_ID']
         db = get_db()
-        cur = db.execute('select * from users where "enrollment_ID" = ?;',[enrollment_ID])
+        cur = db.execute('select * from login_users where "login_ID" = ?;',[enrollment_ID])
         user_result = cur.fetchone()
     return user_result
 
@@ -46,11 +46,27 @@ def first():
 
 
 
+@app.route('/schemes_available')
+def schemes_available():
+    user = get_current_user()
+    if user:
+        schemes = []
+        db = get_db()
+        cur = db.execute('select "monthly","gender" from schemes where "phone" = ?;',[user['login_ID']])
+        result=cur.fetchone()
+        cur = db.execute('select "id" from schemes where ? between "lowerbound" and "upperbound"',[result['monthly']])
+        results = cur.fetchall()
+        return render_template('schemes_available.html',schemes = results)
+    else :
+        return redirect(url_for('login'))
+
+
+
 @app.route('/dashboard')
 def dashboard():
     user = get_current_user()
     if user:
-        global parameters
+
 
         if  request.args.get('country') or request.args.get('category') or request.args.get('language'):
             parameters['country']=request.args.get('country')
@@ -96,6 +112,7 @@ def login():
                 session['login_ID'] = username
                 return  redirect(url_for('dashboard'))
             else :
+
                 return render_template('login.html',flag=0)
         else:
             return render_template('login.html',flag=0)
@@ -125,7 +142,7 @@ def volunteer_form():
 def logout():
     user = get_current_user()
     if user:
-        session.pop('enrollment_ID', None)
+        session.pop('login_ID', None)
         return redirect(url_for('login'))
     else:
         return redirect(url_for('login'))
@@ -134,9 +151,6 @@ def logout():
 def user_form_self():
     if request.method == 'POST':
         name = request.form['name']
-        password = request.form['password']
-        password = hashlib.md5(password.encode())
-        password = password.hexdigest()
         mobile = request.form['phone']
         email = request.form['email']
         dob = request.form['dob']
@@ -149,76 +163,22 @@ def user_form_self():
         zip = request.form['zip']
         membersNum = request.form['membersNum']
         locality = request.form['locality']
-        occupation = request.form["occupation"]
-        monthly = request.form["income"]
+        password = request.form['password']
         db = get_db()
         cur = db.execute('select * from users where "phone" = ?;',[mobile])
         result=cur.fetchone()
-        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,monthly,occupation])
+        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password])
         db.execute('insert into login_users ("login_ID","password") values (?,?)',[mobile,password])
         db.commit()
         return redirect(url_for('login'))
     return render_template('user_form.html')
 
-@app.route('/user_form_volunteer', methods = ['GET','POST'])
+@app.route('/user_form_volunteer')
 def user_form_vol():
-    if request.method == 'POST':
-        name = request.form['name']
-        password = request.form['password']
-        password = hashlib.md5(password.encode())
-        password = password.hexdigest()
-        mobile = request.form['phone']
-        email = request.form['email']
-        dob = request.form['dob']
-        gender = request.form['gender']
-        education = request.form['education']
-        father = request.form['father']
-        mother = request.form['mother']
-        locality = request.form['locality']
-        state = request.form['state']
-        zip = request.form['zip']
-        membersNum = request.form['membersNum']
-        locality = request.form['locality']
-        vol_id = request.form['volunteer']
-        documents = request.form['documents']
-        occupation = request.form["occupation"]
-        monthly = request.form["income"]
-        db = get_db()
-        cur = db.execute('select * from users where "phone" = ?;',[mobile])
-        result=cur.fetchone()
-        if result:
-            return render_template('user_form.html',flag = 0)
-        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","volunteer_id", "documents","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,vol_id, documents,monthly,occupation])
-        db.commit()
-        return "success"
     return render_template('user_form_volunteer.html')
 
 @app.route('/volunteer_form')
 def volunteer_form_reg():
-    if request.method == 'POST':
-        name = request.form['name']
-        password = request.form['password']
-        password = hashlib.md5(password.encode())
-        password = password.hexdigest()
-        mobile = request.form['phone']
-        email = request.form['email']
-        dob = request.form['dob']
-        gender = request.form['gender']
-        education = request.form['education']
-        father = request.form['father']
-        mother = request.form['mother']
-        locality = request.form['locality']
-        state = request.form['state']
-        zip = request.form['zip']
-        locality = request.form['locality']
-        db = get_db()
-        cur = db.execute('select * from volunteers where "phone" = ?;',[mobile])
-        result=cur.fetchone()
-        if result:
-            return render_template('user_form.html',flag = 0)
-        db.execute('insert into volunteers ("name","phone","father","mother","dob","gender","email","education","address","password") values (?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,password])
-        db.commit()
-        return "success"
     return render_template('volunteer_form.html')
 
 @app.route('/contact')

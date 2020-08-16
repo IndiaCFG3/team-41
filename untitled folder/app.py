@@ -149,7 +149,7 @@ def user_form_self():
         cur = db.execute('select * from users where "phone" = ?;',[mobile])
         result=cur.fetchone()
         if result:
-            return render_template('user_form_self',flag = 0)
+            return render_template('user_form.html',flag = 0)
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum])
         db.commit()
         return "success"

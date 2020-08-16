@@ -12,30 +12,12 @@ import hashlib
 import requests
 import os
 from random import randint
-from flask import Flask, render_template, request
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-from chatterbot.trainers import ListTrainer
-
-# bot = ChatBot("Candice")
-# bot.set_trainer(ListTrainer)
-# bot.train(['What is your name?', 'My name is Candice'])
-# bot.train(['Who are you?', 'I am a bot' ])
-# bot.train(['Who created you?', 'Tony Stark', 'Sahil Rajput', 'You?'])
-# bot.set_trainer(ChatterBotCorpusTrainer)
-# bot.train("chatterbot.corpus.english")
 
 
 app = Flask(__name__)
 
 app.config['DEBUG']=True
 app.config['SECRET_KEY']= os.urandom(24)
-
-
-@app.route("/get")
-def get_bot_response():
-    userText = request.args.get('msg')
-    return str(bot.get_response(userText))
 
 
 @app.teardown_appcontext
@@ -45,8 +27,8 @@ def close_db(error):
 
 def get_current_user():
     user_result = None
-    if 'enrollment_ID' in session:
-        enrollment_ID = session['enrollment_ID']
+    if 'login_ID' in session:
+        enrollment_ID = session['login_ID']
         db = get_db()
         cur = db.execute('select * from login_users where "login_ID" = ?;',[enrollment_ID])
         user_result = cur.fetchone()
@@ -74,6 +56,18 @@ def schemes_available():
         return render_template('schemes_available.html',schemes = results)
     else :
         return redirect(url_for('login'))
+
+@app.route('/volunteerTable')
+def volunteerTable():
+    user = get_current_user()
+    if user:
+        db = get_db()
+        cur = db.execute('select * from volunteers' )
+        result=cur.fetchall()
+        return render_template('volunteerTable.html',volun = result)
+    else :
+        return redirect(url_for('login'))
+
 
 
 
@@ -126,7 +120,7 @@ def login():
         if result:
             if result['password']==password :
                 session['login_ID'] = username
-                return  redirect(url_for('dashboard'))
+                return  redirect(url_for('volunteerTable'))
             else :
                 return render_template('login.html',flag=0)
         else:
@@ -187,7 +181,7 @@ def user_form_self():
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password])
         db.execute('insert into login_users ("login_ID","password") values (?,?)',[mobile,password])
         db.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('home'))
     return render_template('user_form.html')
 
 @app.route('/user_form_volunteer', methods = ['GET','POST'])
@@ -220,7 +214,7 @@ def user_form_vol():
             return render_template('user_form.html',flag = 0)
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password","volunteer_id", "documents","monthly","occupation") values (?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password,vol_id, documents,monthly,occupation])
         db.commit()
-        return "success"
+        return redirect(url_for('home'))
     return render_template('user_form_volunteer.html')
 
 @app.route('/volunteer_form', methods = ['GET','POST'])
@@ -246,7 +240,8 @@ def volunteer_form_reg():
             return render_template('user_form.html',flag = 0)
         db.execute('insert into volunteers ("name","phone","father","mother","dob","gender","email","education","address") values (?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality])
         db.commit()
-        return "success"
+        return redirect(url_for('home'))
+
     return render_template('volunteer_form.html')
 
 @app.route('/contact')

@@ -129,7 +129,7 @@ def logout():
     else:
         return redirect(url_for('login'))
 
-@app.route('/user_form')
+@app.route('/user_form', methods = ['GET','POST'])
 def user_form_self():
     if request.method == 'POST':
         name = request.form['name']
@@ -146,13 +146,12 @@ def user_form_self():
         membersNum = request.form['membersNum']
         locality = request.form['locality']
         db = get_db()
-        cur = db.execute('select * from users where "phone" = ?;',[phone])
+        cur = db.execute('select * from users where "phone" = ?;',[mobile])
         result=cur.fetchone()
         if result:
             return render_template('user_form_self',flag = 0)
         db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum])
         db.commit()
-        authenticator(username,token.hexdigest())
         return "success"
     return render_template('user_form.html')
 

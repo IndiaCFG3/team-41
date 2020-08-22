@@ -33,6 +33,8 @@ app.config['DEBUG']=True
 app.config['SECRET_KEY']= os.urandom(24)
 
 
+
+
 @app.teardown_appcontext
 def close_db(error):
     if hasattr(g, 'sqlite_db'):
@@ -48,6 +50,12 @@ def get_current_user():
     return user_result
 
 
+def init_db():
+    db = get_db()
+    with app.open_resource('sqldata.sql', mode='r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()
+
 @app.route('/')
 def home():
     return  render_template('first.html')
@@ -62,64 +70,42 @@ def schemes_available():
     if user:
         schemes = []
         db = get_db()
-        cur = db.execute('select "monthly","gender" from schemes where "phone" = ?;',[user['login_ID']])
+        cur = db.execute('select "monthly","gender" from users where "phone" = ?;',[user['login_ID']])
         result=cur.fetchone()
-        cur = db.execute('select "id" from schemes where ? between "lowerbound" and "upperbound"',[result['monthly']])
+        cur = db.execute('select * from schemes where "lowerbound">=? and "upperbound"<=?',[result['monthly'],result['monthly']])
         results = cur.fetchall()
         return render_template('schemes_available.html',schemes = results)
     else :
         return redirect(url_for('login'))
 
+def getAllSchemes():
+    db = get_db()
+    cur = db.execute('select * from schemes')
+    results = cur.fetchall()
+    return results
+
 @app.route('/volunteerTable')
 def volunteerTable():
+    
     user = get_current_user()
     if user:
         db = get_db()
-        cur = db.execute('select * from volunteers' )
+        cur = db.execute('select * from users where isVolunteer=1' )
         result=cur.fetchall()
         return render_template('volunteerTable.html',volun = result)
     else :
         return redirect(url_for('login'))
 
 
-
-
-
-@app.route('/dashboard')
-def dashboard():
-    user = get_current_user()
-    if user:
-        global parameters
-
-        if  request.args.get('country') or request.args.get('category') or request.args.get('language'):
-            parameters['country']=request.args.get('country')
-            parameters['category']=request.args.get('category')
-            parameters['language']=request.args.get('language')
-            news_fetch = get_news(country=parameters['country'],category=parameters['category'],language=parameters['language'][-3:-1])
-            return render_template('dashboard.html', user=user, params = parameters,news=news_fetch)
-        # if request.args.get('source'):
-        #     parameters['source']=request.args.get('source')
-        #     # parameters=check_if_para_empty(parameters)
-        #     news_fetch = get_news(country=parameters['country'],category=parameters['category'],source=parameters['source'])
-        #     return render_template('dashboard.html', user=user, params = parameters,news=news_fetch)
-        # if request.args.get('category'):
-        #     parameters['category']=request.args.get('category')
-        #     # parameters=check_if_para_empty(parameters)
-        #     news_fetch = get_news(country=parameters['country'],category=parameters['category'],source=parameters['source'])
-        #     return render_template('dashboard.html', user=user, params = parameters,news=news_fetch)
-        news_fetch = get_news(country=parameters['country'],category=parameters['category'],source=parameters['source'])
-        return render_template('dashboard.html', user=user, params = parameters,news=news_fetch)
-
-    else :
-        return redirect(url_for('login'))
-
 @app.route('/dash')
 def dash():
-    return render_template('dashboard.html')
+    schemes = getAllSchemes()
+    return render_template('dashboard.html', schemes=schemes)
 
 @app.route('/schemes')
 def schemes():
-    return render_template('schemes.html')
+    schemes = getAllSchemes()
+    return render_template('schemes.html', schemes=schemes)
 
 @app.route('/createScheme')
 def createSchema():
@@ -134,7 +120,7 @@ def mailsent():
 def login():
     user = get_current_user()
     if user:
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('dash'))
     if request.method == 'POST':
         username = request.form['login-username']
         password = request.form['login-password']
@@ -144,7 +130,7 @@ def login():
         if result:
             if result['password']==password :
                 session['login_ID'] = username
-                return  redirect(url_for('volunteerTable'))
+                return  redirect(url_for('dash'))
             else :
                 return render_template('login.html',flag=0)
         else:
@@ -171,9 +157,19 @@ def volunteer_form():
         return redirect(url_for('login'))
     return render_template('signup.html', flag = 1)
 
-@app.route('/volunteer')
-def volunteer():
-    return render_template('volunteerTable.html')
+
+@app.route('/insertScheme', methods=['POST'])
+def insertScheme():
+    name = request.form['scheme_name']
+    desc = request.form['desc']
+    income_upper = request.form['income_upper']
+    income_lower = request.form['income_lower']
+    gender = request.form['gender']
+    db = get_db()
+    db.execute('insert into schemes ("name","description","lowerbound","upperbound","gender") values (?,?,?,?,?)',[name, desc, income_lower, income_upper,gender])
+    db.commit()
+    return redirect(url_for('dash'))
+
 @app.route('/logout')
 def logout():
     user = get_current_user()
@@ -205,7 +201,7 @@ def user_form_self():
         db = get_db()
         cur = db.execute('select * from users where "phone" = ?;',[mobile])
         result=cur.fetchone()
-        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password") values (?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password])
+        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","fam","password") values (?,?,?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality,membersNum,password])
         db.execute('insert into login_users ("login_ID","password") values (?,?)',[mobile,password])
         db.commit()
         return redirect(url_for('home'))
@@ -268,7 +264,7 @@ def volunteer_form_reg():
         result=cur.fetchone()
         if result:
             return render_template('user_form.html',flag = 0)
-        db.execute('insert into volunteers ("name","phone","father","mother","dob","gender","email","education","address") values (?,?,?,?,?,?,?,?,?)',[name,mobile,father,mother,dob,gender,email,education,locality])
+        db.execute('insert into users ("name","phone","father","mother","dob","gender","email","education","address","isVolunteer") values (?,?,?,?,?,?,?,?,?,1)',[name,mobile,father,mother,dob,gender,email,education,locality])
         db.commit()
         return redirect(url_for('home'))
 
@@ -280,3 +276,4 @@ def contact():
 
 if(__name__) == "__main__":
     app.run(host='0.0.0.0', port=5000)
+    

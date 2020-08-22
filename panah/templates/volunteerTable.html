@@ -41,7 +41,7 @@
 
         Tip 2: you can also add an image using data-image tag
     -->
-      <div class="logo"><a href="/about" class="simple-text logo-normal">
+      <div class="logo"><a href="/" class="simple-text logo-normal">
           Panah Foundation
         </a></div>
       <div class="sidebar-wrapper">
@@ -68,6 +68,12 @@
             <a class="nav-link" href="#">
               <i class="material-icons">library_books</i>
               <p>Volunteer Application</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/user_form_volunteer">
+              <i class="material-icons">library_books</i>
+              <p>Register User</p>
             </a>
           </li>
           <!-- <li class="nav-item ">
@@ -172,8 +178,9 @@
                         Volunteer Phone
                       </th>
                       <th>
-                        City
+                        Email
                       </th>
+                      <th></th>
                     </thead>
                     <tbody>
                       {% for ob in volun %}
@@ -186,6 +193,9 @@
                         </td>
                         <td>
                           {{ob['phone']}}
+                        </td>
+                        <td>
+                          {{ob['email']}}
                         </td>
                         <td>
                           <button type="button" class="btn btn-lg btn-primary">View Application</button>

@@ -1,50 +1,50 @@
 <!--
-=========================================================
-* Material Dashboard Dark Edition - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-dark
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+  =========================================================
+  * Material Dashboard Dark Edition - v2.1.0
+  =========================================================
+  
+  * Product Page: https://www.creative-tim.com/product/material-dashboard-dark
+  * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+  
+  * Coded by www.creative-tim.com
+  
+  =========================================================
+  
+  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
 <html lang="en">
 
 
-        <head>
-                <meta charset="utf-8" />
-                <link rel="apple-touch-icon" sizes="76x76" href="../static/dashboard/assets/img/apple-icon.png">
-                <link rel="icon" type="image/png" href="../static/dashboard/assets/img/favicon.png">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-                <title>
-                  Dashboard
-                </title>
-                <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-                <!--     Fonts and icons     -->
-                <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-                <!-- CSS Files -->
-                <link href="../static/dashboard/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-                <!-- CSS Just for demo purpose, don't include it in your project -->
-                <link href="../static/dashboard/assets/demo/demo.css" rel="stylesheet" />
-              </head>
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../static/dashboard/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../static/dashboard/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Dashboard
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="../static/dashboard/assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../static/dashboard/assets/demo/demo.css" rel="stylesheet" />
+</head>
 
 <body class="dark-edition">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
+        
         Tip 2: you can also add an image using data-image tag
-    -->
-      <div class="logo"><a href="/about" class="simple-text logo-normal">
-          Panah Foundation
-        </a></div>
+      -->
+      <div class="logo"><a href="/" class="simple-text logo-normal">
+        Panah Foundation
+      </a></div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item ">
@@ -59,16 +59,17 @@
               <p>Create Scheme</p>
             </a>
           </li>
-          <!-- <li class="nav-item ">
-            <a class="nav-link" href="#">
-              <i class="material-icons">content_paste</i>
-              <p>Delete Scheme</p>
-            </a>
-          </li> -->
+        
           <li class="nav-item ">
-            <a class="nav-link" href="/volunteer">
+            <a class="nav-link" href="/volunteerTable">
               <i class="material-icons">library_books</i>
               <p>Volunteer Application</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/user_form_volunteer">
+              <i class="material-icons">library_books</i>
+              <p>Register User</p>
             </a>
           </li>
           <!-- <li class="nav-item ">
@@ -90,11 +91,11 @@
             </a>
           </li> -->
           <!-- <li class="nav-item active-pro ">
-                <a class="nav-link" href="./upgrade.html">
-                    <i class="material-icons">unarchive</i>
-                    <p>Upgrade to PRO</p>
-                </a>
-            </li> -->
+            <a class="nav-link" href="./upgrade.html">
+              <i class="material-icons">unarchive</i>
+              <p>Upgrade to PRO</p>
+            </a>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -152,91 +153,91 @@
       </nav>
       <!-- End Navbar -->
       <div class="content">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="card">
-                    <div class="card-header card-header-primary">
-                      <h4 class="card-title">Add Scheme</h4>
-                      <p class="card-category">Add the information about scheme</p>
-                    </div>
-                    <div class="card-body">
-                      <form>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <label class="bmd-label-floating">Scheme Name</label>
-                              <input type="text" class="form-control" name="name" id="name">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                              <label>Description</label>
-                              <div class="form-group">
-                                <label class="bmd-label-floating"> Add Description of scheme</label>
-                                <textarea class="form-control" rows="5" name="desc" id="desc"></textarea>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label class="bmd-label-floating">Lower Bound of Income</label>
-                              <input type="text" class="form-control" name="income_lower" id="income_lower">
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label class="bmd-label-floating">Uppper Bound Of Inomce</label>
-                              <input type="text" class="form-control" name="income_upper" id="income_upper">
-                            </div>
-                          </div>
-                        </div>
-                        
-                      <div class="row">
-                                    <div class="col-md-12">
-                                            <label>Gender: </label><br>
-                                            <div class="form-check form-check-inline">
-                                                <input class="" type="radio" checked name="gender" id="male" value="male" >
-                                                <label class="form-check-label" for="male">Male</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="" type="radio" name="gender" id="female" value="female" >
-                                                <label class="form-check-label" for="female">Female</label>
-                                            </div>
-                                    </div>
-                      </div>
-    
-                        <button type="submit" class="btn btn-primary pull-right">Add scheme</button>
-                        <div class="clearfix"></div>
-                      </form>
-                    </div>
-                  </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Add Scheme</h4>
+                  <p class="card-category">Add the information about scheme</p>
                 </div>
-                <div class="col-md-4">
-                  <div class="card card-profile">
-                    <div class="card-avatar">
-                      <a href="#pablo">
-                        <img class="img" src="https://dz01iyojmxk8t.cloudfront.net/wp-content/uploads/2017/01/06022027/Panah-Foundation-Sijapati-1.jpg" />
-                      </a>
-                    </div>
-                    <div class="card-body">
-                      <h6 class="card-category">Panah Foundation</h6>
-                      <h4 class="card-title">Dignifying Labour</h4>
-                      <p class="card-description">
-                        Panah Foundation works in the space of creating dignity and awareness for the
-                        lowest strata of the society - the informal labour sector.
-                      </p>
-                      <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                <div class="card-body">
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Scheme Name</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                      </div>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Description</label>
+                        <div class="form-group">
+                          <label class="bmd-label-floating"> Add Description of scheme</label>
+                          <textarea class="form-control" rows="5" name="desc" id="desc"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Lower Bound of Income</label>
+                        <input type="text" class="form-control" name="income_lower" id="income_lower">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">Uppper Bound Of Inomce</label>
+                        <input type="text" class="form-control" name="income_upper" id="income_upper">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label>Gender: </label><br>
+                      <div class="form-check form-check-inline">
+                        <input class="" type="radio" checked name="gender" id="male" value="male" >
+                        <label class="form-check-label" for="male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="" type="radio" name="gender" id="female" value="female" >
+                        <label class="form-check-label" for="female">Female</label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <button onclick="createScheme()" class="btn btn-primary pull-right">Add scheme</button>
+                  <div class="clearfix"></div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="https://dz01iyojmxk8t.cloudfront.net/wp-content/uploads/2017/01/06022027/Panah-Foundation-Sijapati-1.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category">Panah Foundation</h6>
+                  <h4 class="card-title">Dignifying Labour</h4>
+                  <p class="card-description">
+                    Panah Foundation works in the space of creating dignity and awareness for the
+                    lowest strata of the society - the informal labour sector.
+                  </p>
+                  <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
       <!-- <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -269,11 +270,7 @@
           </div>
         </div>
       </footer> -->
-      <script>
-        const x = new Date().getFullYear();
-        let date = document.getElementById('date');
-        date.innerHTML = '&copy; ' + x + date.innerHTML;
-      </script>
+      
     </div>
   </div>
   
@@ -296,33 +293,33 @@
   <script src="../static/dashboard/assets/demo/demo.js"></script>
   <script>
     function createScheme(){
-        var data = new FormData()
-        data.append('scheme_name',document.querySelector("#name").value)
-        data.append("desc", document.querySelector("#desc").value)
-        data.append("income_upper", document.querySelector("#income_upper").value)
-        data.append("income_lower", document.querySelector("#income_lower").value)
-        gender = document.querySelector("#male").checked
-        if(gender == true)  gender="male"
-        else    gender="female"
-        data.append("gender", gender)
-        fetch('/insertScheme',{
-                method:"POST",
-                body: data,
-            })
+      var data = new FormData()
+      data.append('scheme_name',document.querySelector("#name").value)
+      data.append("desc", document.querySelector("#desc").value)
+      data.append("income_upper", document.querySelector("#income_upper").value)
+      data.append("income_lower", document.querySelector("#income_lower").value)
+      gender = document.querySelector("#male").checked
+      if(gender == true)  gender="male"
+      else    gender="female"
+      data.append("gender", gender)
+      fetch('/insertScheme',{
+        method:"POST",
+        body: data,
+      })
     }
-
+    
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');
-
+        
         $sidebar_img_container = $sidebar.find('.sidebar-background');
-
+        
         $full_page = $('.full-page');
-
+        
         $sidebar_responsive = $('body > .navbar-collapse');
-
+        
         window_width = $(window).width();
-
+        
         $('.fixed-plugin a').click(function(event) {
           // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
           if ($(this).hasClass('switch-trigger')) {
@@ -333,141 +330,141 @@
             }
           }
         });
-
+        
         $('.fixed-plugin .active-color span').click(function() {
           $full_page_background = $('.full-page-background');
-
+          
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
-
+          
           var new_color = $(this).data('color');
-
+          
           if ($sidebar.length != 0) {
             $sidebar.attr('data-color', new_color);
           }
-
+          
           if ($full_page.length != 0) {
             $full_page.attr('filter-color', new_color);
           }
-
+          
           if ($sidebar_responsive.length != 0) {
             $sidebar_responsive.attr('data-color', new_color);
           }
         });
-
+        
         $('.fixed-plugin .background-color .badge').click(function() {
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
-
+          
           var new_color = $(this).data('background-color');
-
+          
           if ($sidebar.length != 0) {
             $sidebar.attr('data-background-color', new_color);
           }
         });
-
+        
         $('.fixed-plugin .img-holder').click(function() {
           $full_page_background = $('.full-page-background');
-
+          
           $(this).parent('li').siblings().removeClass('active');
           $(this).parent('li').addClass('active');
-
-
+          
+          
           var new_image = $(this).find("img").attr('src');
-
+          
           if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
             $sidebar_img_container.fadeOut('fast', function() {
               $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
               $sidebar_img_container.fadeIn('fast');
             });
           }
-
+          
           if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
             var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
+            
             $full_page_background.fadeOut('fast', function() {
               $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
               $full_page_background.fadeIn('fast');
             });
           }
-
+          
           if ($('.switch-sidebar-image input:checked').length == 0) {
             var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
             var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
-
+            
             $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
             $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
           }
-
+          
           if ($sidebar_responsive.length != 0) {
             $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
           }
         });
-
+        
         $('.switch-sidebar-image input').change(function() {
           $full_page_background = $('.full-page-background');
-
+          
           $input = $(this);
-
+          
           if ($input.is(':checked')) {
             if ($sidebar_img_container.length != 0) {
               $sidebar_img_container.fadeIn('fast');
               $sidebar.attr('data-image', '#');
             }
-
+            
             if ($full_page_background.length != 0) {
               $full_page_background.fadeIn('fast');
               $full_page.attr('data-image', '#');
             }
-
+            
             background_image = true;
           } else {
             if ($sidebar_img_container.length != 0) {
               $sidebar.removeAttr('data-image');
               $sidebar_img_container.fadeOut('fast');
             }
-
+            
             if ($full_page_background.length != 0) {
               $full_page.removeAttr('data-image', '#');
               $full_page_background.fadeOut('fast');
             }
-
+            
             background_image = false;
           }
         });
-
+        
         $('.switch-sidebar-mini input').change(function() {
           $body = $('body');
-
+          
           $input = $(this);
-
+          
           if (md.misc.sidebar_mini_active == true) {
             $('body').removeClass('sidebar-mini');
             md.misc.sidebar_mini_active = false;
-
+            
             $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
-
+            
           } else {
-
+            
             $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
-
+            
             setTimeout(function() {
               $('body').addClass('sidebar-mini');
-
+              
               md.misc.sidebar_mini_active = true;
             }, 300);
           }
-
+          
           // we simulate the window Resize so the charts will get updated in realtime.
           var simulateWindowResize = setInterval(function() {
             window.dispatchEvent(new Event('resize'));
           }, 180);
-
+          
           // we stop the simulation of Window Resize after the animations are completed
           setTimeout(function() {
             clearInterval(simulateWindowResize);
           }, 1000);
-
+          
         });
       });
     });
@@ -476,7 +473,7 @@
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
-
+      
     });
   </script>
 </body>

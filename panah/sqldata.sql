@@ -19,8 +19,11 @@ create table users (
   docs int ,
   membership int,
   password varchar(100),
-  documents varchar(200)
+  documents varchar(200),
+  isVolunteer int
 );
+-- isVolunteer will have value 1 if newly registered, 2 if verified by admin
+
 create table volunteers(
   id integer primary key autoincrement,
   name varchar(100) not null,
@@ -64,8 +67,8 @@ create table schemes(
     lowerbound int not null,
     upperbound int not null,
     gender varchar(100) not null,
-    adhar  int not null,
-    pan int not null
+    adhar  int ,
+    pan int 
 );
 create table login_users(
   login_ID varchar(100) not null,
